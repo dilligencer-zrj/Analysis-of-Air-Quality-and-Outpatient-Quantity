@@ -11,11 +11,11 @@ from network import RNN
 import os
 model_dir = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
 
-TIME_STEP = 98
+TIME_STEP = 120
 INPUT_SIZE = 7
-HIDDEN_SIZE = 8
-LR = 0.02
-EPOCH = 500
+HIDDEN_SIZE = 32
+LR = 0.01
+EPOCH = 1000
 
 rnn = RNN(INPUT_SIZE=INPUT_SIZE,HIDDEN_SIZE=HIDDEN_SIZE)
 optimizer = torch.optim.Adam(rnn.parameters(), lr=LR)
@@ -84,12 +84,12 @@ def val(val_loader,e=0):
 
         # prediction = prediction[-1].view ( -1 )
         prediction = prediction.view ( -1 )
-        result.extend(prediction.data.numpy()*676)
-        target.extend(label.data.numpy()*676)
-        bias.extend(abs(prediction.data.numpy()*676 -label.data.numpy()*676 ))
+        result.extend(prediction.data.numpy())
+        target.extend(label.data.numpy())
+        bias.extend(abs(prediction.data.numpy() -label.data.numpy()) ** 2)
 
-    for i in range(len(result)):
-        print(result[i],  target[i])
+    # for i in range(len(result)):
+    #     print(result[i],  target[i])
     print('average bias>>>>>' , sum(bias)*1.0 / len(bias))
 
     plt.plot(range(len(result)),result,'r')
@@ -112,6 +112,7 @@ if __name__ == '__main__':
     train(train_loader=train_loader,num_e=0)
     val_dateset = dataset2 ( dir = dir, phase='val' )
     val_loader = DataLoader ( val_dateset, batch_size=TIME_STEP, shuffle=False )
-    for i in range(9,499,10):
+    for i in range(9,EPOCH,10):
+        # print(i)
         val ( val_loader=val_loader, e=i )
 

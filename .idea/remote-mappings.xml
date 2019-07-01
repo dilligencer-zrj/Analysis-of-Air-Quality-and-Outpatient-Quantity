@@ -4,6 +4,13 @@
     <list>
       <list>
         <remote-mappings server-id="python@ssh://lixiaoyu@202.117.54.91:22/home/lixiaoyu/workEnv/py3.6/bin/python3.6" />
+        <remote-mappings server-id="python@sftp://lixiaoyu@202.117.54.91:22/home/lixiaoyu/workEnv/py3.6/bin/python3.6">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity" />
+            </list>
+          </settings>
+        </remote-mappings>
       </list>
     </list>
   </component>

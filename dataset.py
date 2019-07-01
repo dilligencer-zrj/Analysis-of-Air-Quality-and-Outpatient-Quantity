@@ -53,14 +53,14 @@ class dataset(Dataset):
 class dataset2(Dataset):
     def __init__(self,dir,phase = 'train'):
         self.phase = phase
-        raw_data = pd.read_csv('./file/res.csv')
-        raw_data = raw_data._values
-        raw_data = np.array(raw_data)
-        for i in range(raw_data.shape[1]):
-            min = np.min(raw_data[:, i])
-            max = np.max(raw_data[:, i])
-            raw_data[:, i] = (raw_data[:, i] - min) / (max - min)
-            print(max, min)
+        # raw_data = pd.read_csv('./file/res_normalized.csv')
+        # raw_data = raw_data._values
+        # raw_data = np.array(raw_data)
+        # for i in range(raw_data.shape[1]):
+        #     min = np.min(raw_data[:, i])
+        #     max = np.max(raw_data[:, i])
+        #     raw_data[:, i] = (raw_data[:, i] - min) / (max - min)
+        #     print(max, min)
 
         breath_num = np.load ( dir + '/呼吸科门诊量.npy' )
 
@@ -105,7 +105,21 @@ class dataset2(Dataset):
         X = np.vstack([SO2, NO2, PM10, CO, PM2_5, O38h, time])
         # X = np.vstack ( [SO2, time] )
         X = X.transpose ( (1, 0) )
+        # Y = raw_data[:, 0]
+        # X = raw_data
+        # X[1:, :] = X[0:len(X) - 1, :]
+        # X[0, :] = 0
+        # # for i in range(len(X) - 1):
+        # #     X[len(X) - i - 1][0] = X[len(X) - i - 2][0]
+        # # X[0][0] = 0
         length = len ( Y )
+        # time = np.zeros((length))
+        # for i in range(length):
+        #     time[i] = i % 7 / 7
+        # X = np.vstack((X[:, 0], X[:, 1], X[:, 2], X[:, 3], X[:, 4], X[:, 5], X[:, 6],
+        #                X[:, 7], X[:, 8], X[:, 9], X[:, 10], X[:, 11], X[:, 12], X[:, 13], X[:, 14], time))
+        # X = X.transpose((1, 0))
+        # # X = np.append(X, time, axis=0)
 
 
         if phase == 'train':
