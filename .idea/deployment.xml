@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="airQuality">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

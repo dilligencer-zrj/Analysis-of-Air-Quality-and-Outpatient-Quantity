@@ -16,7 +16,7 @@ class RNN(nn.Module):
     def forward(self, x):
         x, _ = self.rnn(x)
         t, b, f = x.shape
-        x = x.view ( t * b, f )  # 转化为线性层的输入方式
+        x = x.view ( t * b, f )
         x = self.out ( x )
         x = x.view ( t, b, -1 )
         return x

@@ -9,9 +9,9 @@ from torch.autograd import Variable
 from dataset import dataset,dataset2
 from network import RNN
 import os
-model_dir = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
+model_dir = '/home/lixiaoyu/work/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
 
-TIME_STEP = 98
+TIME_STEP = 120
 INPUT_SIZE = 7
 HIDDEN_SIZE = 8
 LR = 0.02
@@ -99,9 +99,9 @@ def val(val_loader,e=0):
 
 
 if __name__ == '__main__':
-    file_1 = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/file/weather.csv'
-    file_2 = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity//file/outpatient.csv'
-    dir = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/preprocessed_data'
+    file_1 = '/home/lixiaoyu/work/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/file/weather.csv'
+    file_2 = '/home/lixiaoyu/work/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity//file/outpatient.csv'
+    dir = '/home/lixiaoyu/work/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/preprocessed_data'
 
     # train_dateset = dataset(file_1=file_1,file_2=file_2,phase='train')
     # train_loader = DataLoader(train_dateset,batch_size=TIME_STEP,shuffle=False)

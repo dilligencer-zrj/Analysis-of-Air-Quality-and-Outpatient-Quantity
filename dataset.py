@@ -3,6 +3,7 @@ from torch.utils.data import DataLoader, Dataset
 import csv
 import numpy as np
 from utils import cal_mean_var
+import pandas as pd
 division=[11000.0,1000.0]
 dir = '/home/dilligencer/code/一附院时序数据回归/数据处理/'
 TIME_STEP = 2
@@ -52,6 +53,15 @@ class dataset(Dataset):
 class dataset2(Dataset):
     def __init__(self,dir,phase = 'train'):
         self.phase = phase
+        raw_data = pd.read_csv('./file/res.csv')
+        raw_data = raw_data._values
+        raw_data = np.array(raw_data)
+        for i in range(raw_data.shape[1]):
+            min = np.min(raw_data[:, i])
+            max = np.max(raw_data[:, i])
+            raw_data[:, i] = (raw_data[:, i] - min) / (max - min)
+            print(max, min)
+
         breath_num = np.load ( dir + '/呼吸科门诊量.npy' )
 
 
@@ -99,10 +109,11 @@ class dataset2(Dataset):
 
 
         if phase == 'train':
-            self.data, self.label =np.concatenate((X[:int ( length * 1 / 3 )],X[int ( length * 2 / 3 ):])), np.concatenate((Y[:int ( length * 1 / 3 )],Y[int ( length * 2 / 3 ):]))
-
+            self.data, self.label =X[:int ( length * 2 / 3 )], Y[:int ( length * 2 / 3 )]
+            # self.data, self.label =np.concatenate((X[:int ( length * 1 / 3 )],X[int ( length * 2 / 3 ):])), np.concatenate((Y[:int ( length * 1 / 3 )],Y[int ( length * 2 / 3 ):]))
         elif phase == 'val':
-            self.data, self.label =  X[int ( length * 1 / 3 ):int ( length * 2 / 3 )], Y[int ( length * 1 / 3 ):int ( length * 2 / 3 )]
+            self.data, self.label =  X[int ( length * 2 / 3 ):], Y[int ( length * 2 / 3 ):]
+            # self.data, self.label =  X[int ( length * 1 / 3 ):int ( length * 2 / 3 )], Y[int ( length * 1 / 3 ):int ( length * 2 / 3 )]
 
 
 
