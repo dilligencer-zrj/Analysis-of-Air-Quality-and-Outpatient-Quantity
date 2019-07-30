@@ -53,73 +53,73 @@ class dataset(Dataset):
 class dataset2(Dataset):
     def __init__(self,dir,phase = 'train'):
         self.phase = phase
-        # raw_data = pd.read_csv('./file/res_normalized.csv')
-        # raw_data = raw_data._values
-        # raw_data = np.array(raw_data)
+        raw_data = pd.read_csv('./file/res_normalized.csv')
+        raw_data = raw_data._values
+        raw_data = np.array(raw_data)
         # for i in range(raw_data.shape[1]):
         #     min = np.min(raw_data[:, i])
         #     max = np.max(raw_data[:, i])
         #     raw_data[:, i] = (raw_data[:, i] - min) / (max - min)
         #     print(max, min)
 
-        breath_num = np.load ( dir + '/呼吸科门诊量.npy' )
-
-
-        SO2 = np.load ( dir + '/SO2浓度.npy' )
-        NO2 = np.load ( dir + '/NO2浓度.npy' )
-        PM10 = np.load ( dir + '/PM10浓度.npy' )
-        CO = np.load ( dir + '/CO浓度.npy' )
-        O38h = np.load ( dir + '/O38h浓度.npy' )
-        PM2_5 = np.load ( dir + '/PM2-5浓度.npy' )
-
-
-        SO2 = SO2 / float ( SO2.max ( ) )
-        NO2 = NO2 / float ( NO2.max ( ) )
-        PM10 = PM10 / float ( PM10.max ( ) )
-        CO = CO / float ( CO.max ( ) )
-        O38h = O38h / float ( O38h.max ( ) )
-        PM2_5 = PM2_5 / float ( PM2_5.max ( ) )
-        time = []
-        for i in np.arange ( 1, 50 ):
-            time.append ( [i, i] )
-        time = np.array ( time )
-        time = time.reshape ( -1 )
-        time = np.hstack ( (time, time, time) )
-        Y = (breath_num ).astype ( int )
-
-        print ( SO2[:98].mean ( ) )
-        print ( SO2[98:196].mean ( ) )
-        print ( SO2[196:].mean ( ) )
-
-        SO2 = SO2 / float ( SO2.max ( ) )
-        NO2 = NO2 / float ( NO2.max ( ) )
-        PM10 = PM10 / float ( PM10.max ( ) )
-        CO = CO / float ( CO.max ( ) )
-        O38h = O38h / float ( O38h.max ( ) )
-        PM2_5 = PM2_5 / float ( PM2_5.max ( ) )
-        time = time / float ( time.max ( ) )
-        print ( Y.max ( ) )
-        Y = Y / float ( Y.max ( ) )
-        print(Y.max())
-
-        X = np.vstack([SO2, NO2, PM10, CO, PM2_5, O38h, time])
-        # X = np.vstack ( [SO2, time] )
-        X = X.transpose ( (1, 0) )
-        # Y = raw_data[:, 0]
-        # X = raw_data
-        # X[1:, :] = X[0:len(X) - 1, :]
-        # X[0, :] = 0
-        # # for i in range(len(X) - 1):
-        # #     X[len(X) - i - 1][0] = X[len(X) - i - 2][0]
-        # # X[0][0] = 0
+        # breath_num = np.load ( dir + '/呼吸科门诊量.npy' )
+        #
+        #
+        # SO2 = np.load ( dir + '/SO2浓度.npy' )
+        # NO2 = np.load ( dir + '/NO2浓度.npy' )
+        # PM10 = np.load ( dir + '/PM10浓度.npy' )
+        # CO = np.load ( dir + '/CO浓度.npy' )
+        # O38h = np.load ( dir + '/O38h浓度.npy' )
+        # PM2_5 = np.load ( dir + '/PM2-5浓度.npy' )
+        #
+        #
+        # SO2 = SO2 / float ( SO2.max ( ) )
+        # NO2 = NO2 / float ( NO2.max ( ) )
+        # PM10 = PM10 / float ( PM10.max ( ) )
+        # CO = CO / float ( CO.max ( ) )
+        # O38h = O38h / float ( O38h.max ( ) )
+        # PM2_5 = PM2_5 / float ( PM2_5.max ( ) )
+        # time = []
+        # for i in np.arange ( 1, 50 ):
+        #     time.append ( [i, i] )
+        # time = np.array ( time )
+        # time = time.reshape ( -1 )
+        # time = np.hstack ( (time, time, time) )
+        # Y = (breath_num ).astype ( int )
+        #
+        # print ( SO2[:98].mean ( ) )
+        # print ( SO2[98:196].mean ( ) )
+        # print ( SO2[196:].mean ( ) )
+        #
+        # SO2 = SO2 / float ( SO2.max ( ) )
+        # NO2 = NO2 / float ( NO2.max ( ) )
+        # PM10 = PM10 / float ( PM10.max ( ) )
+        # CO = CO / float ( CO.max ( ) )
+        # O38h = O38h / float ( O38h.max ( ) )
+        # PM2_5 = PM2_5 / float ( PM2_5.max ( ) )
+        # time = time / float ( time.max ( ) )
+        # print ( Y.max ( ) )
+        # Y = Y / float ( Y.max ( ) )
+        # print(Y.max())
+        #
+        # X = np.vstack([SO2, NO2, PM10, CO, PM2_5, O38h, time])
+        # # X = np.vstack ( [SO2, time] )
+        # X = X.transpose ( (1, 0) )
+        Y = raw_data[:, 0]
+        X = raw_data
+        X[1:, :] = X[0:len(X) - 1, :]
+        X[0, :] = 0
+        # for i in range(len(X) - 1):
+        #     X[len(X) - i - 1][0] = X[len(X) - i - 2][0]
+        # X[0][0] = 0
         length = len ( Y )
-        # time = np.zeros((length))
-        # for i in range(length):
-        #     time[i] = i % 7 / 7
-        # X = np.vstack((X[:, 0], X[:, 1], X[:, 2], X[:, 3], X[:, 4], X[:, 5], X[:, 6],
-        #                X[:, 7], X[:, 8], X[:, 9], X[:, 10], X[:, 11], X[:, 12], X[:, 13], X[:, 14], time))
-        # X = X.transpose((1, 0))
-        # # X = np.append(X, time, axis=0)
+        time = np.zeros((length))
+        for i in range(length):
+            time[i] = i % 7 / 7
+        X = np.vstack((X[:, 0], X[:, 1], X[:, 2], X[:, 3], X[:, 4], X[:, 5], X[:, 6],
+                       X[:, 7], X[:, 8], X[:, 9], X[:, 10], X[:, 11], X[:, 12], X[:, 13], X[:, 14], time))
+        X = X.transpose((1, 0))
+        # X = np.append(X, time, axis=0)
 
 
         if phase == 'train':

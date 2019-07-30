@@ -11,6 +11,13 @@
             </list>
           </settings>
         </remote-mappings>
+        <remote-mappings server-id="python@sftp://liutao@202.117.54.91:22/home/liutao/env/brain/bin/python3.5">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/home/liutao/project/Analysis-of-Air-Quality-and-Outpatient-Quantity" />
+            </list>
+          </settings>
+        </remote-mappings>
       </list>
     </list>
   </component>

@@ -9,10 +9,10 @@ from torch.autograd import Variable
 from dataset import dataset,dataset2
 from network import RNN
 import os
-model_dir = '/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
+model_dir = '/home/liutao/project/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
 
-TIME_STEP = 120
-INPUT_SIZE = 7
+TIME_STEP = 128
+INPUT_SIZE = 16
 HIDDEN_SIZE = 32
 LR = 0.01
 EPOCH = 1000

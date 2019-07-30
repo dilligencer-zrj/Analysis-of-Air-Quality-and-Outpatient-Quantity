@@ -5,7 +5,7 @@
       <paths name="airQuality">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/lixiaoyu/project/airQuality/Analysis-of-Air-Quality-and-Outpatient-Quantity" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/project/Analysis-of-Air-Quality-and-Outpatient-Quantity" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
