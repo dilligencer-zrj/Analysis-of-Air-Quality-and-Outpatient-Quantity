@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from torch.autograd import Variable
 from dataset import dataset,dataset2
-from network import RNN
+from network import LSTM,MultiHeadAttention,CNN,RNN,GRU,MHA
 import os
 model_dir = '/home/liutao/project/Analysis-of-Air-Quality-and-Outpatient-Quantity/ckpt/'
 
@@ -15,9 +15,31 @@ TIME_STEP = 128
 INPUT_SIZE = 16
 HIDDEN_SIZE = 32
 LR = 0.01
-EPOCH = 1000
+#EPOCH = 1000
+EPOCH = 100
 
-rnn = RNN(INPUT_SIZE=INPUT_SIZE,HIDDEN_SIZE=HIDDEN_SIZE)
+#rnn = LSTM(INPUT_SIZE=INPUT_SIZE,HIDDEN_SIZE=HIDDEN_SIZE)
+#rnn = RNN(INPUT_SIZE=INPUT_SIZE, HIDDEN_SIZE=HIDDEN_SIZE)
+#rnn = MultiHeadAttention(8,'RNN',64,64)
+
+args = {
+    'window' : 24 * 7,
+    'highway_window' : 0,
+    'dropout' : 0.2,
+    'output_fun' : 'sigmoid',
+    'input_size' : INPUT_SIZE,
+    'hidden_size' : HIDDEN_SIZE,
+    'rnn_layers' : 1,
+    'd_k' : 64,
+    'd_v' : 64,
+    'n_head' : 8,
+    'CNN_kernel' : 6
+}
+#rnn = CNN(args=args)
+#rnn = GRU(args=args)
+rnn = MHA(args=args)
+
+
 optimizer = torch.optim.Adam(rnn.parameters(), lr=LR)
 loss_func = nn.MSELoss()
 
